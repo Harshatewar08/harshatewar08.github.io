@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Harsh — Data Analyst</title>
-<meta name="description" content="Harsh — Data Analyst based in Nagpur, India. Retail analytics, SQL, dashboards, and a transition into data engineering.">
+<title>Harsh - Data Analyst</title>
+<meta name="description" content="Harsh - Data Analyst based in Nagpur, India. Retail analytics, SQL, dashboards, and a transition into data engineering.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -56,8 +56,8 @@
         <li>Mechanical engineer by degree (Government College of Engineering, Chandrapur, 2024), data analyst by choice.</li>
         <li>Built the entire analytics function at Shree Beauty Centre from scratch, starting April 2025. There was no dashboard, no pipeline, no "how we track this" before I got there.</li>
         <li>Worked across 200+ brands doing margin analysis, discount strategy, and ETL - the kind of work where a bad landing-cost entry can quietly cost you money for months if nobody's watching.</li>
-        <li>Did a Data Analyst internship at Cognifyz Technologies (Nov–Dec 2024) before this — where I first learned that "clean data" is a verb, not a state.</li>
-        <li>Right now I'm pushing into data engineering - SQL performance, dbt, PySpark, Snowflake — because I want to own the pipeline, not just the dashboard at the end of it.</li>
+        <li>Did a Data Analyst internship at Cognifyz Technologies (Nov–Dec 2024) before this - where I first learned that "clean data" is a verb, not a state.</li>
+        <li>Right now I'm pushing into data engineering - SQL performance, dbt, PySpark, Snowflake - because I want to own the pipeline, not just the dashboard at the end of it.</li>
         <li>I learn by breaking things and rebuilding them, not by watching tutorials. Most of what's on this site came out of that.</li>
       </ul>
     </div>
@@ -96,10 +96,12 @@
       <h2>Experience</h2>
       <h3>Shree Beauty Centre (shreebeauty.in)</h3>
       <ul class="about-list">
-        <li>I'm a data analyst, self-taught - no bootcamp, no degree in this field. I just started pulling numbers apart and didn't stop.</li>
-        <li>Mechanical engineer by degree (Government College of Engineering, Chandrapur, 2024), data analyst by choice.</li>
-        <li>Built the entire analytics function at Shree Beauty Centre from scratch, starting April 2025. There was no dashboard, no pipeline, no "how we track this" before I got there.</li>
-      
+        <li>Built the analytics function from scratch - before this, there was no dashboard, no tracked margin, no "here's how we decide discounts."</li>
+        <li>Ran margin-bucketing and discount-vs-sales analysis across 200+ brands, and found the sweet spot: 11-15% discount range consistently drove the strongest monthly sales lift.</li>
+        <li>Designed a 7-table SQLite schema and built the ETL pipelines that feed it - so the numbers update themselves instead of someone re-pulling reports by hand.</li>
+        <li>Built the Power BI and Excel dashboards the business actually checks day to day.</li>
+        <li>Set up Python/Selenium scripts to track competitor pricing, because "we think we're competitive" isn't the same as knowing it.</li>
+        <li>Built a brand-level discounting strategy in Excel on real transaction data (~₹21.6L weekly sales, 91 brands) - margin health tiers, ABC revenue segmentation, and discount caps by brand tier.</li>
       </ul>
       </div>
   </section>
@@ -109,7 +111,6 @@
     <div class="row-label">A4</div>
     <div class="row-content">
       <h2>Projects</h2>
-      <p class="muted">Each project below opens in its own page, built from the same template. See <code>project-template.html</code> to add a new one.</p>
 
       <div class="project-grid">
 
@@ -117,7 +118,7 @@
         <a class="project-card" href="projects/loan-approval.html">
           <span class="status done">complete</span>
           <h3>Loan Approval Case Study</h3>
-          <p>Classification model on applicant data — 92% accuracy. Feature selection, EDA, and evaluation walkthrough.</p>
+          <p>Classification model on applicant data - 92% accuracy. Feature selection, EDA, and evaluation walkthrough.</p>
           <span class="go">view case study →</span>
         </a>
 
@@ -128,7 +129,7 @@
           <span class="go">view case study →</span>
         </a>
 
-        <!-- Empty slot placeholder — replace with your next project -->
+        <!-- Empty slot placeholder - replace with your next project -->
         <a class="project-card" href="projects/project-template.html">
           <span class="status progress">add project</span>
           <h3>+ New Project</h3>
@@ -145,7 +146,7 @@
     <div class="row-label">A5</div>
     <div class="row-content">
       <h2>Contact</h2>
-      <p class="muted">Open to Data Analyst / Data Engineering roles — Nagpur-based or remote-friendly with Indian startups.</p>
+      <p class="muted">Open to Data Analyst / Data Engineering roles - Nagpur-based or remote-friendly with Indian startups.</p>
       <div class="tags">
         <a class="btn primary" href="mailto:your.email@example.com">email me</a>
         <a class="btn" href="https://github.com/yourusername" target="_blank" rel="noopener">github</a>
@@ -161,7 +162,7 @@
 </footer>
 
 <script>
-  // Typing effect for the hero query bar — purely decorative, respects reduced motion.
+  // Typing effect for the hero query bar - purely decorative, respects reduced motion.
   const q = "SELECT name, role, experience, location FROM harsh.career WHERE status = 'open_to_work';";
   const el = document.getElementById('queryBar');
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
