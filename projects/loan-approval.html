@@ -55,7 +55,7 @@
   <section class="row">
     <div class="row-label">B1</div>
     <div class="row-content">
-      <h2>Problem</h2>
+      <h2><u>Problem</u></h2>
       <p>Lenders need a fast, consistent way to flag which loan applications are likely to be approved before manual underwriting, reducing turnaround time and inconsistent decision-making across reviewers.</p>
     </div>
   </section>
@@ -63,9 +63,9 @@
   <section class="row">
     <div class="row-label">B2</div>
     <div class="row-content">
-      <h2>Data</h2>
-      <p><ul>Imported the Loan-Approval data from <b>Kaggle.in</b></ul>
-        <ul> Consisting of 614 records of costumers with 13 features.</ul>
+      <h2><u>Data</u></h2>
+      <p><ul>1. Imported the Loan-Approval data from <b>Kaggle.in</b></ul>
+        <ul>2. Consisting of 614 records of costumers with 13 features.</ul>
         <ul><b>Features --></b></ul></p>
               <li>Loan ID </li>
               <li>Gender</li>
@@ -86,19 +86,42 @@
   <section class="row">
     <div class="row-label">B3</div>
     <div class="row-content">
-      <h2>Approach</h2>
-      <p>Explored the data to understand class balance and relationships between applicant features and approval outcomes.</p>
-      <p>Cleaned and encoded categorical fields, handled missing values, and engineered features relevant to creditworthiness.</p>
-      <p class="placeholder">Fill in: which model(s) you tried (logistic regression, decision tree, random forest, etc.), how you split train/test, and how you tuned it.</p>
+      <h2><u>Approach</u></h2>
+      <p>
+        <ul><b>1. Data Cleaning --></b></ul>
+      <li>Checked nulls (Gender, Married, Dependents, Self_Employed, Loan_Amount_Term, LoanAmount, Credit_History all had missing values).</li>
+      <li>Filled categorical nulls with mode (loop over 5 columns), LoanAmount with median, Credit_History with mode.</li>
+        
+        <ul><b>2. Exploratory Data Analysis --></b></ul>
+      <li>Loan status distribution (countplot)</li>
+      <li>Applicant income by education level (boxplot)</li>
+      <li>Loan approval by property area (countplot, hued by status)</li>
+        
+        <ul><b>3. Feature Engineering --></b></ul>
+      <li>Converted Dependents ('3+' --> 3) to float</li>
+      <li>Created Total_Income (Applicant + Coapplicant income) and Income_To_LoanRatio</li>
+      <li>Label-encoded categoricals (Gender, Married, Education, Self_Employed, Property_Area) and the target (Loan_Status: Y/N → 1/0)</li>
+      <li>Dropped Loan_ID</li>
+
+        <ul><b>4. Modelling</b></ul>
+      <li>65/35 train-test split</li>
+      <li>Trained 4 models: Logistic Regression, Random Forest, Decision Tree (max_depth=4), XGBoost</li>
+      <li>Applied SMOTE to fix class imbalance, then retrained Random Forest on the resampled data</li>
+      </p>
     </div>
   </section>
 
   <section class="row">
     <div class="row-label">B4</div>
     <div class="row-content">
-      <h2>Results</h2>
-      <p>The final model reached 92% accuracy on the test set.</p>
-      <p class="placeholder">Fill in: precision/recall or confusion matrix if relevant, and which features mattered most (feature importance).</p>
+      <h2><u>Results</u></h2>
+      <p>
+        <li>Class imbalance found: 422 approved vs. 192 not approved. SMOTE balanced this to 422/422 for the retrain.</li>
+        <li>Logistic Regression: 92% accuracy (perfect precision/recall on all 215 test samples)</li>
+        <li>Decision Tree: 86% accuracy</li>
+        <li>XGBoost: 85% accuracy</li>
+        <li>Random Forest (post-SMOTE): 83% precision/recall/F1</li>
+      </p>
     </div>
   </section>
 
@@ -106,7 +129,7 @@
     <div class="row-label">B5</div>
     <div class="row-content">
       <h2>Key takeaway</h2>
-      <p class="placeholder">Fill in: the one thing this project taught you — about the data, the modeling process, or a tradeoff you had to make.</p>
+      <p class="placeholder">The biggest lesson wasn't a modeling technique — it was learning to distrust results that look too good, and treating unrealistic accuracy as a signal to dig into the data pipeline rather than the algorithm.</p>
     </div>
   </section>
 
@@ -115,8 +138,7 @@
     <div class="row-content">
       <h2>Links</h2>
       <div class="tags">
-        <a class="btn primary" href="#" target="_blank" rel="noopener">github repo</a>
-        <a class="btn" href="#" target="_blank" rel="noopener">notebook</a>
+        <a class="btn primary" href="https://github.com/Harshatewar08/Loan-Approval-Case-Study" target="_blank" rel="noopener">github repo</a>
       </div>
     </div>
   </section>
@@ -124,7 +146,7 @@
 </main>
 
 <footer class="footer">
-  built by hand, not a template &nbsp;·&nbsp; Nagpur, IN &nbsp;·&nbsp; updated 2026
+  built by Harsh&nbsp;·&nbsp; Nagpur, IN &nbsp;·&nbsp; updated 2026
 </footer>
 
 </body>
