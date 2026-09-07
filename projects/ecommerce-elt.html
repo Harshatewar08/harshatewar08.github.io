@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecommerce ELT Pipeline - Harsh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">harsh<span>.</span>data</div>
+    <div class="nav-links">
+      <a href="../index.html#projects">all projects</a>
+      <a href="../index.html#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<main class="sheet">
+
+  <section class="project-hero">
+    <a class="back-link" href="../index.html#projects">&larr; back to projects</a>
+
+    <span class="eyebrow">Local ELT Pipeline · Production Project</span>
+    <h1>Ecommerce ELT Pipeline</h1>
+    <p class="muted">Real POS exports from Shree Beauty Cosmetics (SBC), a beauty retailer, come as messy CSVs with 60,000+ rows and 33+ inconsistently named columns —>
+       GST fields, HSN codes, branch and party data, broken headers from Excel exports.
+       This project builds a complete ELT pipeline around that data: load it raw, transform it in layers with dbt, orchestrate it on a schedule with Airflow,
+       and surface it in a Power BI dashboard.  </p>
+
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">DuckDB</span>
+      <span class="tag">dbt</span>
+      <span class="tag">Apache Airflow</span>
+      <span class="tag">Docker</span>
+      <span class="tag">Power BI</span>
+    </div>
+  </section>
+
+  <div class="stat-strip">
+    <div class="stat">
+      <div class="num">92%</div>
+      <div class="label">accuracy</div>
+    </div>
+    <div class="stat">
+      <div class="num">614 rows</div>
+      <div class="label">applicant records</div>
+    </div>
+    <div class="stat">
+      <div class="num">13</div>
+      <div class="label">features used</div>
+    </div>
+  </div>
+
+  <section class="row">
+    <div class="row-label">B1</div>
+    <div class="row-content">
+      <h2><u>Problem</u></h2>
+      <p>ELT tools are usually taught on clean, pre-packaged tutorial datasets. This project intentionally used a real, messy export instead, quoted newlines mid-field, inconsistent delimiters, broken column headers. Because that's what actually breaks pipelines in production, and it's what actually builds the debugging skill.</p>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">B2</div>
+    <div class="row-content">
+      <h2><u>Data</u></h2>
+      <p><ul>1. Imported the Loan-Approval data from <b>Kaggle.in</b></ul>
+        <ul>2. Consisting of 614 records of costumers with 13 features.</ul>
+        <ul><b>Features --></b></ul></p>
+              <li>Loan ID </li>
+              <li>Gender</li>
+              <li>Married</li>
+              <li>Dependents</li>
+              <li>Self_employed</li>
+              <li>Education</li>
+              <li>Applicant_Income</li>
+              <li>Co-Applicant_Income</li>
+              <li>Loan_Amount</li>
+              <li>Loan_Term</li>
+              <li>Credit_History</li>
+              <li>Property_Area</li>
+              <li>Loan Status</li>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">B3</div>
+    <div class="row-content">
+      <h2><u>Approach</u></h2>
+      <p>
+        <ul><b>1. Data Cleaning --></b></ul>
+      <li>Checked nulls (Gender, Married, Dependents, Self_Employed, Loan_Amount_Term, LoanAmount, Credit_History all had missing values).</li>
+      <li>Filled categorical nulls with mode (loop over 5 columns), LoanAmount with median, Credit_History with mode.</li>
+        
+        <ul><b>2. Exploratory Data Analysis --></b></ul>
+      <li>Loan status distribution (countplot)</li>
+      <li>Applicant income by education level (boxplot)</li>
+      <li>Loan approval by property area (countplot, hued by status)</li>
+        
+        <ul><b>3. Feature Engineering --></b></ul>
+      <li>Converted Dependents ('3+' --> 3) to float</li>
+      <li>Created Total_Income (Applicant + Coapplicant income) and Income_To_LoanRatio</li>
+      <li>Label-encoded categoricals (Gender, Married, Education, Self_Employed, Property_Area) and the target (Loan_Status: Y/N → 1/0)</li>
+      <li>Dropped Loan_ID</li>
+
+        <ul><b>4. Modelling</b></ul>
+      <li>65/35 train-test split</li>
+      <li>Trained 4 models: Logistic Regression, Random Forest, Decision Tree (max_depth=4), XGBoost</li>
+      <li>Applied SMOTE to fix class imbalance, then retrained Random Forest on the resampled data</li>
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">B4</div>
+    <div class="row-content">
+      <h2><u>Results</u></h2>
+      <p>
+        <li>Class imbalance found: 422 approved vs. 192 not approved. SMOTE balanced this to 422/422 for the retrain.</li>
+        <li>Logistic Regression: 92% accuracy (perfect precision/recall on all 215 test samples)</li>
+        <li>Decision Tree: 86% accuracy</li>
+        <li>XGBoost: 85% accuracy</li>
+        <li>Random Forest (post-SMOTE): 83% precision/recall/F1</li>
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">B5</div>
+    <div class="row-content">
+      <h2>Key takeaway</h2>
+      <p class="placeholder">The biggest lesson wasn't a modeling technique — it was learning to distrust results that look too good, and treating unrealistic accuracy as a signal to dig into the data pipeline rather than the algorithm.</p>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">B6</div>
+    <div class="row-content">
+      <h2>Links</h2>
+      <div class="tags">
+        <a class="btn primary" href="https://github.com/Harshatewar08/Loan-Approval-Case-Study" target="_blank" rel="noopener">github repo</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  built by Harsh&nbsp;·&nbsp; Nagpur, IN &nbsp;·&nbsp; updated 2026
+</footer>
+
+</body>
+</html>
